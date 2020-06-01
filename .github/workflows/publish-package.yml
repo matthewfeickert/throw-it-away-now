@@ -41,11 +41,11 @@ jobs:
         echo "latest_tag: ${latest_tag}"
         latest_tag_revlist_SHA=$(git rev-list -n 1 ${latest_tag})
         echo "latest_tag_revlist_SHA: ${latest_tag_revlist_SHA}"
-        master_SHA="$(git rev-parse --verify HEAD)"
-        echo "master_SHA: ${master_SHA}"
+        HEAD_SHA="$(git rev-parse --verify HEAD)"
+        echo "HEAD_SHA: ${HEAD_SHA}"
         wheel_name=$(find dist/ -iname "*.whl" -printf "%f\n")
         git branch -a
-        if [[ "${latest_tag_revlist_SHA}" != "${master_SHA}" ]]; then # don't check master push events from tags
+        if [[ "${latest_tag_revlist_SHA}" != "${HEAD_SHA}" ]]; then # don't check branch push events from tags
           if [[ "${wheel_name}" == *"maxborn-0.1.dev"* || "${wheel_name}" != *"dev"* ]]; then
             echo "pep517.build incorrectly named built distribution: ${wheel_name}"
             echo "pep517 is lacking the history and tags required to determine version number"
