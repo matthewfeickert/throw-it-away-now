@@ -44,7 +44,7 @@ jobs:
             return 1
           fi
         else
-          echo "Push event to branch was triggered by push of tag ${latest_tag}"
+          echo "Push event to origin/master was triggered by push of tag ${latest_tag}"
         fi
         echo "pep517.build named built distribution: ${wheel_name}"
     - name: Verify tagged commits don't have dev versions
