@@ -41,8 +41,8 @@ jobs:
         echo "latest_tag: ${latest_tag}"
         latest_tag_revlist_SHA=$(git rev-list -n 1 ${latest_tag})
         echo "latest_tag_revlist_SHA: ${latest_tag_revlist_SHA}"
+        master_SHA="$(git rev-parse --verify master)"
         echo "master_SHA: ${master_SHA}"
-        echo "latest_tag_revlist_SHA: ${latest_tag_revlist_SHA}"
         wheel_name=$(find dist/ -iname "*.whl" -printf "%f\n")
         if [[ "${latest_tag_revlist_SHA}" != "${master_SHA}" ]]; then # don't check master push events from tags
           if [[ "${wheel_name}" == *"maxborn-0.1.dev"* || "${wheel_name}" != *"dev"* ]]; then
