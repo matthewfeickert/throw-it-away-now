@@ -18,4 +18,5 @@ extras_require["complete"] = sorted(set(sum(extras_require.values(), [])))
 setup(
     extras_require=extras_require,
     entry_points={"console_scripts": ["maxborn=maxborn.commandline:maxborn"]},
+    use_scm_version=lambda: {"local_scheme": lambda version: ""},
 )
