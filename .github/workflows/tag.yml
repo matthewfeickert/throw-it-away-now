@@ -62,15 +62,15 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.7
-    - name: Install bumpversion
+    - name: Install bump2version
       run: |
         python -m pip install --upgrade pip setuptools wheel
-        python -m pip install bumpversion
-    - name: Run bumpversion ${{ env['BV_PART'] }}
+        python -m pip install bump2version
+    - name: Run bump2version ${{ env['BV_PART'] }}
       run: |
         OLD_TAG=$(git describe --tags --abbrev=0)
         echo "OLD_TAG=${OLD_TAG}" >> $GITHUB_ENV
-        bumpversion $BV_PART --message "Bump version: {current_version} → {new_version} Triggered by #${PR_NUMBER} via GitHub Actions."
+        bump2version $BV_PART --message "Bump version: {current_version} → {new_version} Triggered by #${PR_NUMBER} via GitHub Actions."
         NEW_TAG=$(git describe --tags --abbrev=0)
         echo "NEW_TAG=${NEW_TAG}" >> $GITHUB_ENV
         git tag -n99 -l $NEW_TAG
